@@ -1,0 +1,33 @@
+<h1>Index</h1>
+
+<% if user_signed_in? %>
+	<%= link_to "Logout", destroy_user_session_path, method: :delete %>
+	<%= form_for Task.new do |f| %>
+
+<div>
+	<%= f.text_field :content %>
+</div>
+
+<% end %>
+
+<table>
+	<tr>
+		<th><%= current_user.email %></th>
+
+	</tr>
+	<% for e in current_user.tasks %>
+		<tr>
+			<td> <%= e.content %>
+			<%= link_to "delete", e, method: :delete %> </td>
+		</tr>
+	<% end %>
+</table>
+<% else %>
+	<%= link_to "Sign up", new_user_registration_path %> 
+  	<%= link_to "Login", new_user_session_path %>
+<%end %>
+
+
+
+
+
